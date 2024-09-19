@@ -1,1 +1,1 @@
-# Servidor-de-exerc-cios-JS
+# Servidor-de-exercicios-JS
