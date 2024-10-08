@@ -63,47 +63,60 @@ async function main(){
     // Valores passados para o Ex1
     const a = exercises['soma']['entrada']['a'];
     const b = exercises['soma']['entrada']['b'];
-    const resultado_1 = soma_valores(a, b); // Resolvendo o exercício
-    submit_answer(token,"soma",resultado_1);
+    const resultado_1 = soma(a, b); // Resolvendo o exercício
+    await submit_answer(token,"soma",resultado_1);
 
     // Valor passados para o Ex2
     const str = exercises['tamanho-string']['entrada']['string'];
     const resultado_2 = tamanho_string(str); // Resolvendo o exercício
-    submit_answer(token,"tamanho-string",resultado_2);
+    await submit_answer(token,"tamanho-string",resultado_2);
 
     // Valores passados para o Ex3
     const email = exercises['nome-do-usuario']['entrada']['email'];
     const resultado_3 = nome_usuario(email); // Resolvendo o exercício
-    submit_answer(token,"nome-do-usuario",resultado_3);
+    await submit_answer(token,"nome-do-usuario",resultado_3);
 
     // Valores passados para o Ex4
     const v = exercises['jaca-wars']['entrada']['v'];
     const theta = exercises['jaca-wars']['entrada']['theta'];
     const resultado_4 = jaca_wars(v,theta); // Resolvendo o exercício
-    submit_answer(token,"jaca-wars",resultado_4);
+    console.log(v);
+    console.log(theta);
+    console.log(resultado_4);
+    await submit_answer(token,"jaca-wars",resultado_4);
 
     // Valor passados para o Ex5
     const ano = exercises['ano-bissexto']['entrada']['ano'];
     const resultado_5 = bissexto(ano); // Resolvendo o exercício
-    submit_answer(token,"ano-bissexto",resultado_5);
+    await submit_answer(token,"ano-bissexto",resultado_5);
 
     // Valores passados para o Ex 6
     const raio = exercises['volume-da-pizza']['entrada']['z'];
     const altura = exercises['volume-da-pizza']['entrada']['a'];
     const resultado_6 = volume(raio,altura); // Resolvendo o exercício
-    submit_answer(token,"volume-da-pizza",resultado_6);
+    await submit_answer(token,"volume-da-pizza",resultado_6);
     
     // Valores passados para o Ex 7
     const s0 = exercises['mru']['entrada']['s0'];
     const vel = exercises['mru']['entrada']['v'];
     const t = exercises['mru']['entrada']['t'];
     const resultado_7 = mru(s0,vel,t); // Resolvendo o exercício  
-    submit_answer(token,"mru",resultado_7);
+    await submit_answer(token,"mru",resultado_7);
 
     // Valores passados para o Ex 8
     const stri = exercises['inverte-string']['entrada']['string'];
     const resultado_8 = inverte(stri); // Resolvendo o exercício
-    submit_answer(token,"inverte-string",resultado_8);
+    await submit_answer(token,"inverte-string",resultado_8);
+
+    // Valores passados para o Ex 9
+    const objeto = exercises['soma-valores']['entrada']['objeto'];
+    const resultado_9 = soma_valores(objeto); // Resolvendo o exercício
+    submit_answer(token,"soma-valores",resultado_9);
+
+    // Valores passados para o Ex 10
+    const n = exercises['n-esimo-primo']['entrada']['n'];
+    const resultado_10 = n_primo(n); // Resolvendo o exercício
+    await submit_answer(token,"n-esimo-primo",resultado_10);
 
   } catch (error) {
     console.error("Erro:", error);
@@ -111,7 +124,7 @@ async function main(){
 
 }
 
-function soma_valores(a, b) {
+function soma(a, b) {
   return a + b;
 }
 
@@ -124,16 +137,19 @@ function nome_usuario(email){
 }
 
 function jaca_wars(v, theta){
-  dist = (v**2 * Math.sin(2*theta))/9.8;
+  theta_rad = theta * Math.PI / 180;
+  dist = (v**2 * Math.sin(2*theta_rad))/9.8;
 
   const alvo = 100;
   const raio = 2;
 
   if (dist < alvo - raio) {
-    return -1; 
-  } else if (dist > alvo + raio) {
+    return -1;
+  }
+  if (dist > alvo + raio) {
     return 1;
-  } else {
+  } 
+  if (alvo-raio<=dist && dist<=alvo+raio){  
     return 0;
   }
 }
@@ -162,5 +178,43 @@ function mru(s0,vel,t){
 function inverte(stri){
   return stri.split('').reverse().join('');
 }
+
+function soma_valores(objeto) {
+  let soma = 0;
+
+  for (let key in objeto) {
+    if (objeto.hasOwnProperty(key)) {
+      soma += objeto[key];
+    }
+  }
+
+  return soma;
+}
+
+
+function n_primo(n) {
+  let count = 0;
+  let num = 1;
+
+  const isPrimo = (num) => {
+    if (num < 2) return false;
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+      if (num % i === 0) return false;
+    }
+    return true;
+  };
+
+  while (count < n) {
+    num++;
+    if (isPrimo(num)) {
+      count++;
+    }
+  }
+
+  return num;
+}
+
+
+
 
 main();
