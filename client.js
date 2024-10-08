@@ -100,6 +100,11 @@ async function main(){
     const resultado_7 = mru(s0,vel,t); // Resolvendo o exercício  
     submit_answer(token,"mru",resultado_7);
 
+    // Valores passados para o Ex 8
+    const stri = exercises['inverte-string']['entrada']['string'];
+    const resultado_8 = inverte(stri); // Resolvendo o exercício
+    submit_answer(token,"inverte-string",resultado_8);
+
   } catch (error) {
     console.error("Erro:", error);
   };
@@ -154,5 +159,8 @@ function mru(s0,vel,t){
   return s0 + vel*t;
 }
 
+function inverte(stri){
+  return stri.split('').reverse().join('');
+}
 
 main();
