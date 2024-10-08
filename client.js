@@ -44,7 +44,7 @@ function submit_answer(token, slug , answer) {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${token}`, // Token de autenticação
+          Authorization: `Bearer ${token}`, // Obtenção do Token de autenticação
         }
       }
     );
@@ -56,27 +56,43 @@ async function main(){
     let token = await get_token();
     console.log("Token:", token);
     // Utilizamos o token para obter a lista de exercícios
-
     let exercises = await get_exercises(token);
+    // Imprime a lista de exercícios
     console.log(exercises);
 
-    // const a = exercises['soma']['entrada']['a'];
-    // const b = exercises['soma']['entrada']['b'];
+    // Valores passados para o Ex1
+    const a = exercises['soma']['entrada']['a'];
+    const b = exercises['soma']['entrada']['b'];
+    const resultado_1 = soma_valores(a, b); // Resolvendo o exercício
+    submit_answer(token,"soma",resultado_1);
 
-    // console.log(a);
-    // console.log(b);
+    // Valor passados para o Ex2
+    const str = exercises['tamanho-string']['entrada']['string'];
+    const resultado_2 = tamanho_string(str); // Resolvendo o exercício
+    submit_answer(token,"tamanho-string",resultado_2);
 
-    // const str = exercises['tamanho-string']['entrada']['string'];
-
+    // Valores passados para o Ex3
     const email = exercises['nome-do-usuario']['entrada']['email'];
+    const resultado_3 = nome_usuario(email); // Resolvendo o exercício
+    submit_answer(token,"nome-do-usuario",resultado_3);
 
+    // Valores passados para o Ex4
+    const v = exercises['jaca-wars']['entrada']['v'];
+    const theta = exercises['jaca-wars']['entrada']['theta'];
+    const resultado_4 = jaca_wars(v,theta); // Resolvendo o exercício
+    submit_answer(token,"jaca-wars",resultado_4);
 
+    // Valor passados para o Ex5
+    const ano = exercises['ano-bissexto']['entrada']['ano'];
+    const resultado_5 = bissexto(ano); // Resolvendo o exercício
+    submit_answer(token,"ano-bissexto",resultado_5);
 
-    const resultado = nome_usuario(email); // Resolvendo o exercício
+    // Valores passados para o Ex 6
+    const raio = exercises['volume-da-pizza']['entrada']['z'];
+    const altura = exercises['volume-da-pizza']['entrada']['a'];
+    const resultado_6 = volume(raio,altura); // Resolvendo o exercício
+    submit_answer(token,"volume-da-pizza",resultado_6);
     
-    console.log(`O resultado é: ${resultado}`);
-    // Submetendo a resposta do exercício com o token e o resultado
-    await submit_answer(token,'nome-do-usuario',resultado);
 
   } catch (error) {
     console.error("Erro:", error);
@@ -94,6 +110,38 @@ function tamanho_string(str){
 
 function nome_usuario(email){
   return email.split('@')[0];
+}
+
+function jaca_wars(v, theta){
+  dist = (v**2 * Math.sin(2*theta))/9.8;
+
+  const alvo = 100;
+  const raio = 2;
+
+  if (dist < alvo - raio) {
+    return -1; 
+  } else if (dist > alvo + raio) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+function bissexto(ano){
+  if (ano % 400 == 0){
+    return true;
+  } else if (ano % 100 == 0){
+    return false;
+  } else if (ano % 4 == 0){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function volume(raio,altura){
+  area = Math.PI * raio**2 * altura;
+  return Math.round(area);
 }
 
 
