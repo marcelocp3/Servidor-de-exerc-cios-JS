@@ -93,6 +93,12 @@ async function main(){
     const resultado_6 = volume(raio,altura); // Resolvendo o exercício
     submit_answer(token,"volume-da-pizza",resultado_6);
     
+    // Valores passados para o Ex 7
+    const s0 = exercises['mru']['entrada']['s0'];
+    const vel = exercises['mru']['entrada']['v'];
+    const t = exercises['mru']['entrada']['t'];
+    const resultado_7 = mru(s0,vel,t); // Resolvendo o exercício  
+    submit_answer(token,"mru",resultado_7);
 
   } catch (error) {
     console.error("Erro:", error);
@@ -144,6 +150,9 @@ function volume(raio,altura){
   return Math.round(area);
 }
 
+function mru(s0,vel,t){
+  return s0 + vel*t;
+}
 
 
 main();
