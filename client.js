@@ -102,7 +102,7 @@ async function main(){
   //Ex 9
   const objeto = exercises['soma-valores']['entrada']['objeto'];
   const resultado_9 = soma_valores(objeto); 
-  submit_answer(token,"soma-valores",resultado_9);
+  await submit_answer(token,"soma-valores",resultado_9);
 
   //Ex 10
   const n = exercises['n-esimo-primo']['entrada']['n'];
