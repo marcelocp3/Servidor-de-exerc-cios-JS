@@ -206,28 +206,5 @@ function n_primo(n) {
   return num;
 }
 
-function maior_prefixo_comum(strings) {
-  if (strings.length === 0) return '';
-
-  // Ordena o array para ter o menor e o maior string
-  strings.sort();
-  
-  // Pega a primeira e a última string após a ordenação
-  const primeira = strings[0];
-  const ultima = strings[strings.length - 1];
-  let i = 0;
-
-  // Compara as strings até que os caracteres não coincidam mais
-  while (i < primeira.length && primeira[i] === ultima[i]) {
-    i++;
-  }
-
-  // Retorna o maior prefixo comum
-  return primeira.substring(0, i);
-}
-
-
-
-
 
 main();
