@@ -108,11 +108,6 @@ async function main(){
   const n = exercises['n-esimo-primo']['entrada']['n'];
   const resultado_10 = n_primo(n); 
   await submit_answer(token,"n-esimo-primo",resultado_10);
-
-  // Ex 11
-  const strings = exercises['maior-prefixo-comum']['entrada']['strings'];
-  const resultado_11 = maior_prefixo_comum(strings);
-  await submit_answer(token, "maior-prefixo-comum", resultado_11);
   }
 
 
